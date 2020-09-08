@@ -25,6 +25,7 @@ class Session extends Model
 
         /* AUTHORIZED! */
               //update user info
+              $user->sign_in_count=$user->sign_in_count+1;
               $user->last_sign_in_ip = $user->current_sign_in_ip;//IP
               $user->last_sign_in_at = $user->current_sign_in_at;//DateTime
 

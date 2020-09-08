@@ -27,8 +27,7 @@ class TaskController extends Controller
             'status' => ['required', 'string', 'max:255', 'min:1'],
             'estimated_hours' => ['integer', 'min:0'],
             'worked_hours' => ['integer', 'min:0'],
-            'link' => ['string', 'max:255', 'min:1'],
-            'user_id' => ['required', 'integer', 'min:1', 'exists:users,id'],
+            'link' => ['string', 'max:255', 'min:1']
         ]);
 
         //new task
@@ -37,13 +36,14 @@ class TaskController extends Controller
         //fill
         $task->fill($validatedData);
 
+        $task->user_id=$user->id;
+
         //save data
         $task->save();
 
         return response()->json([
             'success' => true,
-            'response' => $task,
-            'user' => $user
+            'response' => $task
         ]);
     }
 
