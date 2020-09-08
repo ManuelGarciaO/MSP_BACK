@@ -17,14 +17,14 @@ class CreateTasksTable extends Migration
             $table->bigIncrements('id');
             $table->timestamps();
             $table->foreignId('user_id');
-            $table->string('name');
-            $table->string('description');
-            $table->string('status');
-            $table->string('type');
-            $table->date('deadline');
-            $table->integer('estimated_hours');
+            $table->string('name')->nullable();
+            $table->string('description')->nullable();
+            $table->string('status')->nullable();
+            $table->string('type')->nullable();
+            $table->date('deadline')->nullable();
+            $table->integer('estimated_hours')->nullable();
             $table->integer('worked_hours')->default(0);
-            $table->string('link');
+            $table->string('link')->nullable();
             $table->boolean('archived')->default(0);
         });
     }
