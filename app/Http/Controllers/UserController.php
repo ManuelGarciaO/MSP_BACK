@@ -208,7 +208,7 @@ class UserController extends Controller
     public function searcher(Request $request){
 
         //authorization
-        $this->authorization(JWTAuth::user(), $this->subject_class, 'manage');
+        //$this->authorization(JWTAuth::user(), $this->subject_class, 'manage');
         //end authorization
 
           //validate
@@ -248,7 +248,7 @@ class UserController extends Controller
 
                //query
               $query = DB::table('users')
-                  ->select('id', 'inactive', 'name', 'email', 'sign_in_count', 'current_sign_in_at', 'current_sign_in_ip', 'last_sign_in_ip', 'last_sign_in_at', 'created_at', 'updated_at', 'parking_lot_id', 'area_id','accounting_account_id');
+                  ->select('id', 'inactive', 'name', 'last_name','email', 'sign_in_count', 'current_sign_in_at', 'current_sign_in_ip', 'last_sign_in_ip', 'last_sign_in_at', 'created_at', 'updated_at');
 
               //filters
               foreach ($validatedData as $key => $value) {
