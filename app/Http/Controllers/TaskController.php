@@ -176,12 +176,10 @@ class TaskController extends Controller
           ->select('id', 'archived','user_id','name','description','type','deadline','status','estimated_hours','worked_hours','link','created_at' ,'updated_at');
   
           //filters
+          $query->where('user_id', $user->id);
           foreach ($validatedData as $key => $value) {
             switch ($key) {
                 case 'archived':
-                    $query->where($key, $value);
-                    break;
-                case 'user_id':
                     $query->where($key, $value);
                     break;
                 case 'name':
