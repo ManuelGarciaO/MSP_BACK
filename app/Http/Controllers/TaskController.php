@@ -22,6 +22,7 @@ class TaskController extends Controller
         $validatedData = self::getValidatedJson($request, [
             'name' => ['required', 'string', 'max:255', 'min:1'],
             'description' => ['required', 'string', 'max:255', 'min:1'],
+            'subject_id' => ['required', 'integer', 'min:1', 'exists:subjects,id'],
             'type' => ['required', 'string', 'max:255', 'min:1'],
             'deadline' => ['date_format:Y-m-d', 'min:1', 'max:50'],
             'status' => ['required', 'string', 'max:255', 'min:1'],
@@ -75,6 +76,7 @@ class TaskController extends Controller
         $validatedData = self::getValidatedJson($request, [
             'name' => ['string', 'max:255', 'min:1'],
             'description' => ['string', 'max:255', 'min:1'],
+            'subjec_id' => ['required', 'integer', 'min:1', 'exists:subjects,id'],
             'type' => ['string', 'max:255', 'min:1'],
             'deadline' => ['date_format:Y-m-d', 'min:1', 'max:50'],
             'status' => ['string', 'max:255', 'min:1'],
@@ -134,6 +136,7 @@ class TaskController extends Controller
           'name' => 'string|min:1|max:30',
           'description' => 'string|min:1|max:30',
           'type' => 'string|min:1|max:30',
+          'subjec_id' => 'integer', 'min:1',
           'deadline' => 'date_format:Y-m-d',
           'status' => 'string|min:1|max:30',
           'estimated_hours' => 'numeric|min:0',
@@ -173,7 +176,7 @@ class TaskController extends Controller
   
           //query
           $query = DB::table('tasks')
-          ->select('id', 'archived','user_id','name','description','type','deadline','status','estimated_hours','worked_hours','link','created_at' ,'updated_at');
+          ->select('id', 'archived','user_id','name','description', 'subject_id','type','deadline','status','estimated_hours','worked_hours','link','created_at' ,'updated_at');
   
           //filters
           $query->where('user_id', $user->id);
@@ -186,6 +189,9 @@ class TaskController extends Controller
                     $query->where($key, 'like', "%$value%");
                     break;
                 case 'description':
+                    $query->where($key, $value);
+                    break;
+                case 'subject_id':
                     $query->where($key, $value);
                     break;
                 case 'type':
