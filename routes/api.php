@@ -28,6 +28,9 @@ require "$VERSION/session/api.php";
 //Task
 require "$VERSION/task/api.php";
 
+//Subject
+require "$VERSION/subject/api.php";
+
 /*//Accounting accounts
 require "$VERSION/accounting_account/api.php";
 
