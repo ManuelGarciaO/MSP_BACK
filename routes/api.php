@@ -31,6 +31,9 @@ require "$VERSION/task/api.php";
 //Subject
 require "$VERSION/subject/api.php";
 
+//Subject
+require "$VERSION/admin/api.php";
+
 /*//Accounting accounts
 require "$VERSION/accounting_account/api.php";
 

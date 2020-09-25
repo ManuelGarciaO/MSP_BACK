@@ -76,7 +76,7 @@ class TaskController extends Controller
         $validatedData = self::getValidatedJson($request, [
             'name' => ['string', 'max:255', 'min:1'],
             'description' => ['string', 'max:255', 'min:1'],
-            'subjec_id' => ['required', 'integer', 'min:1', 'exists:subjects,id'],
+            'subject_id' => ['required', 'integer', 'min:1', 'exists:subjects,id'],
             'type' => ['string', 'max:255', 'min:1'],
             'deadline' => ['date_format:Y-m-d', 'min:1', 'max:50'],
             'status' => ['string', 'max:255', 'min:1'],
