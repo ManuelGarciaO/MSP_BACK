@@ -11,7 +11,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post("/$path", "$controller@create");
 
     //get 
-    Route::get("/$path/{id}", "$controller@getById")->where('id','[1-9][0-9]*');
+    Route::get("/$path/getAll", "$controller@getSubjects");
 
     //update task by id
     Route::patch("/$path/{id}", "$controller@update")->where('id','[1-9][0-9]*');

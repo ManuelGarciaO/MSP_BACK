@@ -36,4 +36,31 @@ class SubjectController extends Controller
             'response' => $subject
         ]);
     }
+
+    //get user's subjects
+    public function getSubjects(Request $request){
+        //authorization
+        $user = JWTAuth::User();
+        //end authorization
+
+        //query
+        $query = DB::table('subjects')
+        ->select('id','name')
+        ->orderBy('name');
+
+        //filters
+        $query->where('user_id', $user->id);
+
+        // total items
+        $items_found = $query->count();
+
+        //return values
+        return response()->json([
+            'success' => true,
+            'response' => [
+            'total_items' => $items_found,
+            'results' => $query->get()
+            ]
+          ]);
+    }
 }
