@@ -195,19 +195,19 @@ class TaskController extends Controller
                     $query->where($key, $value);
                     break;
                 case 'type':
-                    $query->where('subtotal', '>=', $value);
+                    $query->where($key, $value);
                     break;
                 case 'deadline':
-                    $query->where('subtotal', '<=', $value);
+                    $query->where($key, $value);
                     break;
                 case 'status':
                     $query->where($key, $value);
                     break;
                 case 'estimated_hours':
-                    $query->where('iva', '>=', $value);
+                    $query->where($key, $value);
                     break;
                 case 'worked_hours':
-                    $query->where('iva', '<=', $value);
+                    $query->where($key, $value);
                     break;
                 case 'link':
                     $query->where($key, $value);
