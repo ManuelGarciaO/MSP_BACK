@@ -31,6 +31,9 @@ require "$VERSION/task/api.php";
 //Subject
 require "$VERSION/subject/api.php";
 
+//Stats
+require "$VERSION/stats/api.php";
+
 //Subject
 require "$VERSION/admin/api.php";
 
