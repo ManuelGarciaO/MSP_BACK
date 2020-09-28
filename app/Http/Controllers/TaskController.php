@@ -21,13 +21,12 @@ class TaskController extends Controller
 
         $validatedData = self::getValidatedJson($request, [
             'name' => ['required', 'string', 'max:255', 'min:1'],
-            'description' => ['required', 'string', 'max:255', 'min:1'],
+            'description' => ['string', 'max:255', 'min:1'],
             'subject_id' => ['required', 'integer', 'min:1', 'exists:subjects,id'],
             'type' => ['required', 'string', 'max:255', 'min:1'],
-            'deadline' => ['date_format:Y-m-d', 'min:1', 'max:50'],
-            'status' => ['required', 'string', 'max:255', 'min:1'],
+            'deadline' => ['string', 'max:255', 'min:1'],
+            'status' => ['string', 'max:255', 'min:1'],
             'estimated_hours' => ['integer', 'min:0'],
-            'worked_hours' => ['integer', 'min:0'],
             'link' => ['string', 'max:255', 'min:1']
         ]);
 
@@ -255,4 +254,30 @@ class TaskController extends Controller
       }
   
       // \\searcher (manage)
+
+    //add hours
+    public function addTime(Request $request)
+    {
+        //authorization
+        $user = JWTAuth::User();
+        //$this->authorization($user, $this->subject_class, 'update');
+        //end authorization
+
+        //find the resource
+        $task = Task::find($request->task_id);
+        if($user->id != $task->user_id){
+            abort(403, 'You are not the owner of this task');
+        }
+
+        //fill
+        $task->worked_hours+=$request->hours;
+
+        //save
+        $task->save();
+
+        return response()->json([
+            'success' => true,
+            'response' => $task
+        ]);
+    }
 }
