@@ -23,5 +23,8 @@ Route::group(['middleware' => ['jwt.verify']], function() {
 
     //searcher
     Route::get("/$path/searcher", "$controller@searcher");  
+
+    //searcher
+    Route::post("/$path/addTime", "$controller@addTime");
 });
 

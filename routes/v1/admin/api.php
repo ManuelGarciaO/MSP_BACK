@@ -17,4 +17,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
 
     //unable
     Route::patch("/$path/unable/{id}", "$controller@unable");
+
+    //delete
+    Route::delete("/$path/delete/{id}", "$controller@delete");
 }); 
