@@ -16,13 +16,14 @@ class UserStats extends Controller
 
         //query worked and estimated hours
         $query = DB::table('tasks')
-        ->select(DB::raw('SUM(tasks.worked_hours) as worked, SUM(tasks.estimated_hours) as estimated'))
-        ->where('tasks.user_id', $user->id);
+        ->select(DB::raw('SUM(tasks.estimated_hours) as estimated'))
+        ->where('tasks.user_id', $user->id)->first();
+
 
         return response()->json([
             'success' => true,
             'response' => [
-            'results' => $query->get(),
+            'results' => $query,
             ]
           ]);
     }
@@ -41,7 +42,7 @@ class UserStats extends Controller
         return response()->json([
             'success' => true,
             'response' => [
-            'results' => $query->get(),
+            'results' => $query->first(),
             ]
           ]);
     }
@@ -60,7 +61,7 @@ class UserStats extends Controller
         return response()->json([
             'success' => true,
             'response' => [
-            'results' => $query->get(),
+            'results' => $query->first(),
             ]
           ]);
     }
@@ -79,7 +80,7 @@ class UserStats extends Controller
         return response()->json([
             'success' => true,
             'response' => [
-            'results' => $query->get(),
+            'results' => $query->first(),
             ]
           ]);
     }
