@@ -16,11 +16,8 @@ class UserStats extends Controller
 
         //query worked and estimated hours
         $query = DB::table('tasks')
-        ->select('subjects.name as name', DB::raw('SUM(tasks.worked_hours) as worked, SUM(tasks.estimated_hours) as estimated'))
-        ->join('subjects', 'tasks.subject_id', '=', 'subjects.id')
-        ->where('tasks.user_id', $user->id)
-        //->where('type', 'tarea')
-        ->groupBy('tasks.subject_id');
+        ->select(DB::raw('SUM(tasks.worked_hours) as worked, SUM(tasks.estimated_hours) as estimated'))
+        ->where('tasks.user_id', $user->id);
 
         return response()->json([
             'success' => true,
@@ -37,10 +34,9 @@ class UserStats extends Controller
 
         //query total Homeworks
         $query = DB::table('tasks')
-        ->select('subject_id', DB::raw('COUNT(*) as Homeworks'))
+        ->select( DB::raw('COUNT(*) as Homeworks'))
         ->where('user_id', $user->id)
-        ->where('type', 'tarea')
-        ->groupBy('subject_id');
+        ->where('type', 'tarea');
 
         return response()->json([
             'success' => true,
@@ -57,10 +53,9 @@ class UserStats extends Controller
 
         //query total exams
         $query = DB::table('tasks')
-        ->select('subject_id', DB::raw('COUNT(*) as Exams'))
+        ->select(DB::raw('COUNT(*) as Exams'))
         ->where('user_id', $user->id)
-        ->where('type', 'examen')
-        ->groupBy('subject_id');
+        ->where('type', 'examen');
 
         return response()->json([
             'success' => true,
@@ -77,10 +72,9 @@ class UserStats extends Controller
 
         //query total proyects
         $query = DB::table('tasks')
-        ->select('subject_id', DB::raw('COUNT(*) as Proyects'))
+        ->select(DB::raw('COUNT(*) as Proyects'))
         ->where('user_id', $user->id)
-        ->where('type', 'proyecto')
-        ->groupBy('subject_id');
+        ->where('type', 'proyecto');
 
         return response()->json([
             'success' => true,
