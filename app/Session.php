@@ -46,7 +46,8 @@ class Session extends Model
                   'response' => [
                     'token' => $token,
                     'type' => 'bearer',
-                    'expire' =>  ( (int) env('JWT_TTL', 60)) * 7200 
+                    'expire' =>  ( (int) env('JWT_TTL', 60)) * 7200,
+                    'admin' => $user->admin
                 ]
               ], 201);
 
