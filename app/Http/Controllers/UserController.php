@@ -23,7 +23,7 @@ class UserController extends Controller
             'name' => ['required', 'string', 'max:255', 'min:1'],
             'last_name' => ['required', 'string', 'max:255', 'min:1'],
             'email' => ['required', 'email', 'max:255', 'min:3', 'unique:users'],
-            'password' => ['required', 'string', 'alpha_dash', 'max:50', 'min:6']
+            'password' => ['required', 'string', 'max:50', 'min:6']
             ]);
 
         User::create($validatedData);
